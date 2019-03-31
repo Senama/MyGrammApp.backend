@@ -8,8 +8,8 @@ CREATE TABLE users (
     username VARCHAR UNIQUE NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     avatar VARCHAR UNIQUE NOT NULL,
-    createdat TIMESTAMP NOT NULL DEFAULT NOW(),
-    updatedat TIMESTAMP NOT NULL DEFAULT NOW()
+    createdata TIMESTAMP NOT NULL DEFAULT NOW(),
+    updatedata TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE post (
@@ -30,12 +30,21 @@ CREATE TABLE comments (
 
 CREATE TABLE likes (
     id SERIAL PRIMARY KEY,
-    personlikedid INT REFERENCES users (id) NOT NULL,
+    personlikedid INT REFERENCES users(id) NOT NULL,
     postid INT REFERENCES post(id) NOT NULL
 );
 
 CREATE TABLE followers (
     id SERIAL PRIMARY KEY,
-    personfollowingid INT REFERENCES users (id) NOT NULL,
-    personbeingfollowedid INT REFERENCES post(id) NOT NULL
+    followerid INT REFERENCES users(id) NOT NULL,
+    followedid INT REFERENCES post(id) NOT NULL
 );
+
+INSERT INTO users (username, email, following_number, follower_number) VALUES
+(1, username);
+
+INSERT INTO posts (postid, postimgurl, caption) VALUES
+(1, 'postimg', 'posttxt');
+
+INSERT INTO comments (userid, postid, text) VALUES 
+(1, 1, 'text');
